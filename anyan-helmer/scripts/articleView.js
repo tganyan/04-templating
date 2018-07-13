@@ -7,9 +7,9 @@ let articleView = {};
 // COMMENT: How do arrow functions affect the context of "this"? How did you determine if a function could be refactored?
 // PUT YOUR RESPONSE HERE
 
-articleView.populateFilters = function() {
-  $('article').each(function() {
-    if (!$(this).hasClass('template')) {
+articleView.populateFilters = () =>{
+  $('article').each(function(){
+    if (!$(this).hasClass('template')) {   
       let val = $(this).find('address a').text();
       let optionTag = `<option value="${val}">${val}</option>`;
 
@@ -26,45 +26,47 @@ articleView.populateFilters = function() {
   });
 };
 
-articleView.handleAuthorFilter = function() {
-  $('#author-filter').on('change', function() {
-    if ($(this).val()) {
-      $('article').hide();
-      $(`article[data-author="${$(this).val()}"]`).fadeIn();
-    } else {
-      $('article').fadeIn();
-      $('article.template').hide();
-    }
-    $('#category-filter').val('');
-  });
-};
+// articleView.handleAuthorFilter = () => {
+//   $('#author-filter').on('change', () => {
+//     if ($(this).val()) {
+//       $('article').hide();
+//       $(`article[data-author="${$(this).val()}"]`).fadeIn();
+//     } else {
+//       $('article').fadeIn();
+//       $('article.template').hide();
+//     }
+//     $('#category-filter').val('');
+//   });
+// };
 
-articleView.handleCategoryFilter = function() {
-  $('#category-filter').on('change', function() {
-    if ($(this).val()) {
-      $('article').hide();
-      $(`article[data-category="${$(this).val()}"]`).fadeIn();
-    } else {
-      $('article').fadeIn();
-      $('article.template').hide();
-    }
-    $('#author-filter').val('');
-  });
-};
+// articleView.handleCategoryFilter = () => {
+//   $('#category-filter').on('change', () => {
+//     if ($(this).val()) {
+//       $('article').hide();
+//       $(`article[data-category="${$(this).val()}"]`).fadeIn();
+//     } else {
+//       $('article').fadeIn();
+//       $('article.template').hide();
+//     }
+//     $('#author-filter').val('');
+//   });
+// };
 
-articleView.handleMainNav = function() {
-  $('nav').on('click', '.tab', function(e) {
-    e.preventDefault();
-    $('.tab-content').hide();
-    $(`#${$(this).data('content')}`).fadeIn();
-  });
+// articleView.handleMainNav = () => {
+//   $('nav').on('click', '.tab', (e) => {
+//     e.preventDefault();
+//     $('.tab-content').hide();
+//     $(`#${$(this).data('content')}`).fadeIn();
+//   });
 
-  $('nav .tab:first').click();
-};
+//   $('nav .tab:first').click();
+// };
 
-articleView.setTeasers = function() {
+articleView.setTeasers = () => {
   $('.article-body *:nth-of-type(n+2)').hide();
-  $('article').on('click', 'a.read-on', function(e) {
+  $('article').on('click', 'a.read-on', function(e)  {
+    // let readingThis = this;
+    // console.log(readingThis);
     e.preventDefault();
     if ($(this).text() === 'Read on →') {
       $(this).parent().find('*').fadeIn();
@@ -79,10 +81,10 @@ articleView.setTeasers = function() {
   });
 };
 
-$(document).ready(function() {
+$(document).ready(() => {
   articleView.populateFilters();
-  articleView.handleCategoryFilter();
-  articleView.handleAuthorFilter();
-  articleView.handleMainNav();
+  // articleView.handleCategoryFilter();
+  // articleView.handleAuthorFilter();
+  // articleView.handleMainNav();
   articleView.setTeasers();
 })
